@@ -1,4 +1,6 @@
+#include <array>
 #include <iostream>
+
 // using namespace std;
 // cout is from std
 
@@ -12,6 +14,8 @@ void foo() {
   printf("name space is global");
   printf("second line code thing");
 }
+
+void increment_number(int *start, int *stop);
 
 int addbunch(int a, int b) {
   // this function needs to be delcare first before `main`
@@ -43,8 +47,8 @@ int main() {
   int a = 2; // this is called `copy initialization`
   int b(4);  // this is `direct initialization`, some complex case this is more
              // efficient
-
-  printf("My int is %d\n", a);
+  int c{99};
+  printf("My int is %d, another int is %d\n", a, c);
 
   doSomethingInt();
   doSomethingInt(20, 30);
@@ -130,5 +134,95 @@ int main() {
 
   cout << addbunch(100, 200) << "\n";
 
+  int foo[5] = {2, 2, 4, 5, 1};
+  cout << "\n" << foo << "\n";
+  cout << foo[0] << "\n";
+  foo[0] = 1;
+  cout << foo << "\n";
+  cout << foo[0] << "\n";
+
+  int i, rett = 0;
+  for (i = 0; i < 5; i++) {
+    rett += foo[i];
+  }
+  cout << rett << "\n";
+
+  int myarray[3] = {10, 20, 30};
+
+  for (int i = 0; i < 3; ++i) {
+    ++myarray[i];
+  }
+
+  for (int elem : myarray)
+    cout << elem << '\n';
+
+  array<int, 3> myarray1{10, 20, 30}; // from array library
+
+  for (int i = 0; i < myarray1.size(); ++i)
+    ++myarray1[i];
+
+  for (int elem : myarray1)
+    cout << elem << '\n';
+
+  // cout << myarray1;
+  // this is invalid, but cout << myarray is valid
+
+  char myword[] = "helloworld";
+  cout << myword << "\n";
+
+  char myword1[2];
+  myword1[0] = 'h'; // `'` will work, double quote will error
+  myword1[1] = '\0';
+  cout << myword1 << "\n";
+
+  char question1[] = "What is your name? ";
+  string question2 = "Where do you live? ";
+
+  cout << question1[0] << "\n";
+  cout << question2[1] << "\n";
+
+  char myntcs[] = "some text";
+  string mystring = myntcs;
+
+  cout << myntcs << "\n";
+  cout << mystring.c_str() << "\n";
+
+  int myfoo = 25;
+  cout << &myfoo << "\n";
+  int *mybar = &myfoo; // when you declare, you use *, which means mybar will
+                       // take address as a value
+  cout << mybar << "\n" << *mybar << "\n";
+
+  int myvar;
+  int *myptr = &myvar;
+
+  myvar = 20;
+  cout << *myptr << "\n";
+
+  int numbers[] = {10, 20, 30};
+  cout << numbers[0] << "\n";
+  cout << "------------------";
+
+  //  int numbers1[3];
+  //  numbers1 = numbers + 3; error!
+
+  for (int j = 0; j < 3; j++) {
+    cout << numbers[j] << "\n";
+  }
+
+  increment_number(numbers, numbers + 3); // pointer address operation
   return 0;
+}
+
+void increment_number(int *start, int *stop) {
+  std::cout << "insdie func"
+            << "\n";
+  std::cout << *start << "\n";
+  std::cout << *stop << "\n";
+  //    int * current = start;
+  //
+  //    while (current != stop) {
+  //      ++(*current);
+  //      ++current;
+  //    }
 }

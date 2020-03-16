@@ -1,5 +1,12 @@
 # learncpp
 
+## how to add a second target in Xcode
+- file
+- new
+- target
+
+Remember to change build target.
+
 ## Data type
 Literal constants can be classified into: integer, floating-point, characters, strings, Boolean, pointers, and user-defined literals.
 ```c++

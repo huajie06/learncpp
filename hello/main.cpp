@@ -15,7 +15,10 @@ void foo() {
   printf("second line code thing");
 }
 
-void increment_number(int *start, int *stop);
+void increment_number(int *, int *);
+// void increment_number(int *stop, int *end); same as above
+
+void fvoidpts(void *data, int psize);
 
 int addbunch(int a, int b) {
   // this function needs to be delcare first before `main`
@@ -210,19 +213,91 @@ int main() {
     cout << numbers[j] << "\n";
   }
 
-  increment_number(numbers, numbers + 3); // pointer address operation
+  increment_number(numbers, numbers + 3);
+
+  cout << "----------------\n";
+  int arr[] = {1, 4, 3, 4, 5, 5, 6};
+  // array is define as a pointer to hold the index=0 value
+  // ++*arr = ++(*arr)
+  // *++arr
+  cout << *(arr + 1);
+  cout << "\n----------------\n";
+
+  char cc[] = "hello";
+  // const char * cc = "hello";
+  cout << *cc;
+  cout << cc[4];
+  cout << *(cc + 4);
+
+  cout << "----\n";
+  char x = 'a';
+  char *pchar;
+  pchar = &x;
+  cout << "original char is :" << x << "\n";
+  ++(*pchar);
+  cout << "new char is :" << *pchar << "\n";
+
+  char voidpt = 'a';
+  cout << voidpt;
+  fvoidpts(&voidpt, sizeof(voidpt));
+  cout << voidpt << "\n";
+
+  int xxx = 1;
+  cout << xxx;
+  //++xxx;
+  xxx++;
+  cout << xxx;
+
+  cout << "-------\n";
+  struct product {
+    int weight;
+    double price;
+  };
+
+  product apple;
+  apple.price = 12.3;
+  apple.weight = 20;
+  cout << apple.price;
+
+  cout << "\n---------------\n";
+  product *orange;
+  orange = &apple; // you need to initialize a pointer variable first basically
+  orange->price = 100;
+  cout << orange->price;
+  cout << (*orange).price;
+  cout << "\n---------------\n";
+
+  typedef int iii;
+  iii iiiv = 10;
+  cout << iiiv << "\n";
+
+  cout << sizeof(int) << "|" << sizeof(iiiv) << "|" << sizeof(iii) << "\n";
+
   return 0;
 }
 
+void fvoidpts(void *data, int psize) {
+  if (psize == sizeof(char)) {
+    char *newchar;
+    newchar = (char *)data; //????
+    ++(*newchar);
+  }
+};
+
 void increment_number(int *start, int *stop) {
-  std::cout << "insdie func"
-            << "\n";
-  std::cout << *start << "\n";
-  std::cout << *stop << "\n";
-  //    int * current = start;
-  //
-  //    while (current != stop) {
-  //      ++(*current);
-  //      ++current;
-  //    }
+  //  std::cout << "insdie func"
+  //            << "\n";
+  //  std::cout << start << "\n";
+  //  std::cout << stop << "\n";
+  int *current = start;
+
+  while (current != stop) {
+    ++(*current);
+    ++current;
+  }
+  std::cout << "\n-------y--------\n";
+  for (int j = 0; j < 3; j++) {
+    std::cout << start[j] << "\n";
+  }
+  std::cout << "\n----------------\n";
 }

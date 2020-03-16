@@ -1,2 +1,4 @@
 hello.xcodeproj
 .DS_Store
+*.o
+*.out
